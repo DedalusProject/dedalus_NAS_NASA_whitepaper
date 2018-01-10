@@ -33,5 +33,5 @@ p = message_counts['users'][:-1].plot(label='dedalus-users') # trim off Jan 2018
 p = message_counts['dev'][:-1].plot(label='dedalus-dev') # trim off Jan 2018
 p.set_ylim(0,100)
 p.set_ylabel('Messages to dedalus lists')
-p.legend(loc='upper left')
-fig.savefig('message_counts.png',dpi=300)
+p.legend(loc='upper left').draw_frame(False)
+fig.savefig('../figs/message_counts.png',dpi=300)
