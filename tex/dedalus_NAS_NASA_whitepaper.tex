@@ -91,7 +91,11 @@ In order to allow users to assess optimzation and performance, we have published
 \section{Looking to the Future}
 \label{sec:future}
 
-Containerizing applications; stack dependence; installation; ensuring supercomputing facilities are up-to-date on this.
+As mentioned in section~\ref{sec:repro}, there are often published results relying on calculations at a scale far too large to allow outside researchers to reproduce directly. In this case, we believe that the solution is to make datasets available along with analysis scripts and parameter files. The latter are particularly important should Moore's law continue to provide exponetial growth in computational power; what is infeasble to reproduce today may not be in a few years' time. An open-code policy adapted by NASA should consider not only the requirement to make this available but also provide guidance on the use of \emph{middleware} designed to ease the burden of doing so. One particularly promising effort is the Whole Tale Project, which promises to link data, analysis scripts, and computing frontends (e.g. Jupyter notebook) to allow ``living publications'' in which any researcher can re-run analysis on datasets to reproduce results. 
+
+Second, an open-code policy should also be focused on a future where computing hardware is increasingly fungible. Here, we imagine an emphasis on contanerization solutions for software stacks including the open-source AFD simulation tools themselves. The use Docker containers for this purpose in industry is widespread, and astrophysics should follow suit. While some challenges remain for high-performance computing applications, \href{https://github.com/NERSC/shifter}{Shifter} and \href{http://singularity.lbl.gov/}{Singularity} have made significant steps toward remedying them. 
+
+%Containerizing applications; stack dependence; installation; ensuring supercomputing facilities are up-to-date on this.
 
 \section{Recommendations}
 \label{sec:recommendations}
