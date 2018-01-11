@@ -1,12 +1,11 @@
-\documentclass[12pt, preprint]{aastex}
-%\documentclass[12pt]{paper}
-
+\documentclass[12pt, titlepage]{aastex62}
+\NewPageAfterKeywords
 \newcommand{\dedalus}{\href{http://dedalus-project.org}{Dedalus}}
 %\usepackage{natbib}
-\usepackage[margin=1in]{geometry}
-\usepackage{xcolor}
-\usepackage{hyperref}
-\urlstyle{same}
+% \usepackage[margin=1in]{geometry}
+% \usepackage{xcolor}
+% \usepackage{hyperref}
+% \urlstyle{same}
 \hypersetup{
   colorlinks,
   linkcolor=red,
@@ -14,17 +13,26 @@
   citecolor=gray
 }
 
-\title{Perspectives on Reproducibility and Sustainability of Open Source Scientific Software from Seven Years of the Dedalus Project}
-\author{The Dedalus Collective}
 \begin{document}
-\maketitle
+\title{Perspectives on Reproducibility and Sustainability of Open Source Scientific Software from Seven Years of the Dedalus Project}
+\collaboration{The Dedalus Collective}
+\author{Jeffrey S. Oishi}
+\affiliation{Bates College}
+\author{Ben Brown}
+\affiliation{University of Colorado, Boulder}
+\author{Keaton J. Burns}
+\affiliation{MIT}
+\author{Daniel Lecoanet}
+\affiliation{Princeton}
+\author{Geoffrey Vasil}
+\affiliation{University of Sydney}
 
 \section{Introduction}
 \label{sec:intro}
 %Background on Dedalus; mission, code, users.
-As the Science Mission Directorate contemplates establishing an open code policy, we consider it timely to share our experiences as the developers of the open source partial differential equation solver \dedalus{}. \dedalus{} is a flexible framework for solving partial differential equations. Its development team primarily uses it for studying stellar and planetary astrophysics.  \dedalus{} was developed originally for astrophysical fluid dynamics (AFD), though it has found a much broader user base, including applied mathematicians, plasma physicists, and oceanographers. Here, we will focus on issues related to open source software from the perspective of AFD. We use the term AFD with the understanding that astrophysics simulations are inherently multi-physics: fluid dynamics coupled with some combination of gravitational dynamics, radiation transfer, relativity, and magnetic fields. This leads to very large simulation codebases, which are typically dominated by a few well-known open-source packages. However, we will argue that an open-code policy should encompass not just these large simulation codes, but also the input files and analysis scripts. \textbf{It is our interest that NASA adopt an open-code policy because without it, reproducibility in computational science is needlessly hampered.} 
+As the Science Mission Directorate contemplates establishing an open code policy, we consider it timely to share our experiences as the developers of the open source partial differential equation solver \dedalus{}. \dedalus{} is a flexible framework for solving partial differential equations. Its development team primarily uses it for studying stellar and planetary astrophysics.  \dedalus{} was developed originally for astrophysical fluid dynamics (AFD), though it has found a much broader user base, including applied mathematicians, plasma physicists, and oceanographers. Here, we will focus on issues related to open source software from the perspective of AFD. We use the term AFD with the understanding that astrophysics simulations are inherently multi-physics: fluid dynamics coupled with some combination of gravitational dynamics, radiation transfer, relativity, and magnetic fields. In practice, a few well-known open-source simulation packages represent a large fraction of published work in the field. However, we will argue that an open-code policy should encompass not just these large simulation codes, but also the input files and analysis scripts. \textbf{It is our interest that NASA adopt an open-code policy because without it, reproducibility in computational science is needlessly hampered.} 
 
-With the caveat that we have not performed bibliometric analyses, it seems reasonable to assert that the majority of papers published in AFD are done using open source codes, especially in star formation, accretion disk physics, and large-scale structure formation. \emph{Athena}, \emph{Enzo}, \emph{Pencil Code}, \emph{Pluto}, and \emph{Gadget 2} are very widely used. In stellar astrophysical fluid dynamics, there are fewer examples of open-source tools, with \href{http://magic-sph.github.io}{MagIC} and \href{http://amrex-astro.github.io/MAESTRO/}{MAESTRO} as important exceptions. For many of these simulation codes, the preferred method of in-depth data analysis is via \href{http://yt-project.org}{yt}, a pioneering open-source project that introduced many of the important development and community-building concepts we use in \dedalus{}. 
+With the caveat that we have not performed bibliometric analyses, it seems reasonable to assert that the majority of papers published in AFD are done using open source codes, especially in star formation, accretion disk physics, and large-scale structure formation. \emph{Athena}, \emph{Enzo}, \emph{Pencil Code}, \emph{Pluto}, and \emph{Gadget 2} are very widely used. In stellar astrophysical fluid dynamics, there are fewer examples of open-source tools, with \href{http://magic-sph.github.io}{MagIC} and \href{http://amrex-astro.github.io/MAESTRO/}{MAESTRO} as important exceptions. For many of these simulation codes, the preferred method of in-depth data analysis is via \href{http://yt-project.org}{yt}, a pioneering open-source project that introduced many of the important development and community-building concepts we use in \dedalus{}. These codes tend to be very large: Athena has $\simeq 80,000$ SLOC; Enzo is over $120,000$ lines, and MAESTRO is over $161,000$ lines! Such complexity is not unique to open-source tools; the authors have significant experience with closed-source astrophysics codes (\emph{ORION} and \emph{ASH}) that are of comparible size. 
 
 \dedalus{} is written primarily in python; it has a very small code base of approximately 7000 source lines of code (SLOC)\footnote{source lines of code measured using the the \href{https://github.com/bytbox/sloc}{sloc tool} on publically available repositories of each code as of 3 January 2018}. It originated in an effort by one of us to develop a easily modifiable, modern fluid dynamics solver for studying magnetohydrodynamic turbulence problems in AFD. The first commit to the project was in 2010. In 2012, the project expanded from two people to five. Since then, nine people have made commits to the code base, including four not affiliated with the core development team. We have logged 46 pull requests, representing peer-reviewed code contributions. The code is licensed under the GNU General Public License Version 3 (GPL). We chose this license because we want to ensure that the source code always be available for inspection and auditing by any interested parties. 
 
@@ -32,20 +40,18 @@ We do not ask users to register before receiving the code. Doing so would, in ou
 
 The subcommunity of astrophysical fluid dynamics modelling thus tends to embrace open-source even without an official policy. However, this is, in our view, not sufficient, especially as it can vary from field to field: many of the most important spherical dynamo codes for studying stellar and planetary magnetic fields remain closed-source (e.g. \emph{Rayleigh}, \emph{ASH}, various derivatives of the Glatzmaier/Gilman code). The simulation code is only one part of a long pipeline that starts with an idea and ends with a published result. An open-code mandate should eliminate any closed-source bottlenecks that could hamper what is, in our view, the cornerstone of the scientific computing enterprise: repeatability. That is, simply because the largest piece of software is available, if the input files and analysis scripts are not also public, reproducibility becomes impossible. 
 
-These codes tend to be very large: Athena has $\simeq 80,000$ SLOC; Enzo is over $120,000$ lines, and MAESTRO is over $161,000$ lines! 
-
 Here, we argue that the benefits of open-source projects far exceeds their costs; we outline our view on exactly what those benefits and costs are, and we suggest that in order to maximize scientific returns on software development, \emph{open-source} is not enough. The best use comes from \emph{community-driven} software tools that blur lines between users and developers. Nevertheless, we strongly recommend that Science Mission Directorate adapt an open code policy that embraces \emph{explicitly licensed}, discoverable software. 
 
 \section{Reproducibility}
 \label{sec:repro}
 
-Two of the most important tasks in computational modelling are \textbf{verification} and \textbf{validation}. In the context of numerical simulation, verification is the assessment of ensuring the software correctly solves a given set of equations; validation is the act of ensuring the equations solved correctly reproduce the physical phenomena of interest \citep{2002PrAeS..38..209O}. 
+Reproducibility is the cornerstone of scientific research, but there are serious concerns regarding the ability to reproduce computational results \citep[see][and references therein]{2012ICERM_REPORT}. There are many definitions of reproducibility; here we focus on the ability of outside researchers to replicate published results. Open-source codes support this reproducibility by allowing any researcher the ability to, in theory, use the same tool as the original study. However, as mentioned in the introduction, modern AFD codes are extremely large; though \emph{Dedalus} is an order of magnitude smaller than others, it gives users much more freedom in specifying problems and thus remains similarly complex to use. 
 
-Open source tools strongly facilitate this activity. Verification tests are plentiful; there is a strong tradition of benchmark problems and inter-code comparisons in AFD \citep[e.g.][among many others]{2001JGR...106.3715B,2014GeoJI.197..119M,2014ApJS..210...14K,2016MNRAS.455.4274L}.
+% Two of the most important tasks in computational modelling are \textbf{verification} and \textbf{validation}. In the context of numerical simulation, verification is the assessment of ensuring the software correctly solves a given set of equations; validation is the act of ensuring the equations solved correctly reproduce the physical phenomena of interest \citep{2002PrAeS..38..209O}. 
 
-In particular, validation is nearly impossible for astrophysical fluid dynamics when applied directly to the problems of interest: there are precious few astrophysical experiments that can be done repeatably in the lab. Outside of direct astrophysical problems, one could perform validation tests against known terrestrial fluid dynamics problems.  However, many such flows involve complex boundary layers, which are rare enough in astrophysics to often be excluded from many AFD codes. 
+% Verification tests are plentiful; there is a strong tradition of benchmark problems and inter-code comparisons in AFD \citep[e.g.][among many others]{2001JGR...106.3715B,2014GeoJI.197..119M,2014ApJS..210...14K,2016MNRAS.455.4274L}. However, validation is nearly impossible for AFD: there are precious few astrophysical experiments that can be done repeatably in the lab. However, one could perform validation tests against known terrestrial fluid dynamics problems.  However, many such flows involve complex boundary layers, which are rare enough in astrophysics to often be excluded from many AFD codes. Nevertheless, 
 
-There are several important ways in which we can attempt validation. NASA has already developed a set of best practices for verification and validation computational fluid dynamics (\url{https://www.grc.nasa.gov/www/wind/valid/tutorial/valassess.html}). 
+% There are several important ways in which we can attempt validation. NASA has already developed a set of best practices for verification and validation computational fluid dynamics (\url{https://www.grc.nasa.gov/www/wind/valid/tutorial/valassess.html}). 
 
 \section{Maintenance and User Support}
 \label{sec:support}
@@ -56,7 +62,7 @@ Providing open-source code is not without cost. Direct costs are quite minimal; 
 
 \begin{figure}
   \centering
-  \includegraphics{../figs/message_counts.png}
+  \includegraphics[width=0.5\textwidth]{../figs/message_counts.png}
   \caption{Message traffic on the \texttt{dedalus-users} and \texttt{dedalus-dev} google groups.}
   \label{fig:messages}
 \end{figure}
@@ -77,7 +83,9 @@ Containerizing applications; stack dependence; installation; ensuring supercompu
 
 ``A numbered list of supporters who did not contribute significantly to the text'' goes here.
 
-\bibliographystyle{apj_title}
-\bibliography{dedalus}
+{\footnotesize
+%\bibliographystyle{apj_title}
+\bibliographystyle{aasjournal}
+\bibliography{dedalus}}
 
 \end{document}
