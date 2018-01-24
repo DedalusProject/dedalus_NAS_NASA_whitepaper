@@ -1,3 +1,4 @@
+
 \documentclass[12pt, titlepage]{aastex62}
 \NewPageAfterKeywords
 \newcommand{\dedalus}{\href{http://dedalus-project.org}{Dedalus}}
@@ -16,22 +17,22 @@
 \begin{document}
 
 %6. A cover page may be included and will not count toward the 5-page limit. It should state the title of the white paper, the primary author’s name, phone number, institution, and email address. All authors who contributed significantly to the text must be named on the cover page, including: full name, position, affiliation, and how they are a stakeholder. The permission of each co-author must be explicitly given prior to submission
-\title{Perspectives on Reproducibility and Sustainability of Open-Source Scientific Software from Seven Years of the Dedalus Project}
+\title{Perspectives on Reproducibility and Sustainability of Open-Source Scientific Software from Seven Years of the Dedalus Project\\{\small A white paper submitted to the National Academies of Sciences, Engineering, and Medicine's Best Practices for a Future Open Code Policy for NASA Space Science}}
 \collaboration{The Dedalus Collective}
 \author{Jeffrey S. Oishi}
-\affiliation{Bates College; Dedalus core team member}
+\affiliation{Bates College}
 
 \correspondingauthor{Jeffrey S. Oishi}
 \email{joishi@bates.edu}
 
 \author{Benjamin P. Brown}
-\affiliation{University of Colorado, Boulder; Dedalus core team member}
+\affiliation{University of Colorado, Boulder}
 \author{Keaton J. Burns}
-\affiliation{MIT; Dedalus core team member}
+\affiliation{MIT}
 \author{Daniel Lecoanet}
-\affiliation{Princeton; Dedalus core team member}
+\affiliation{Princeton}
 \author{Geoffrey M. Vasil}
-\affiliation{University of Sydney; Dedalus core team member}
+\affiliation{University of Sydney}
 
 \section{Introduction}
 \label{sec:intro}
@@ -40,7 +41,7 @@ As the Science Mission Directorate contemplates establishing an open code policy
 
 With the caveat that we have not performed bibliometric analyses, it seems reasonable to assert that the majority of papers published in AFD are done using open-source codes, especially in star formation, accretion disk physics, and large-scale structure formation. \emph{Athena}, \emph{Enzo}, \emph{Pencil Code}, \emph{Pluto}, and \emph{Gadget 2} are all widely used open-source tools. In stellar AFD, there are fewer examples of open-source tools; \href{http://magic-sph.github.io}{MagIC} and \href{http://amrex-astro.github.io/MAESTRO/}{MAESTRO} are important exceptions. For many of these simulation codes, the preferred method of in-depth data analysis is via \href{http://yt-project.org}{yt}, a pioneering open-source project that introduced many of the important development and community-building concepts we use in \dedalus{}. These codes tend to be very large: Athena has $\simeq 80,000$ SLOC; Enzo is over $120,000$ lines, and MAESTRO is over $161,000$ lines\footnote{All source lines of code reported here are measured using the the \href{https://github.com/bytbox/sloc}{sloc tool} on publicly available repositories of each code as of 3 January 2018}! Such complexity is not unique to open-source tools; two of us have significant experience with closed-source astrophysics codes (\emph{ORION} and \emph{ASH}) of comparable size. The sheer size of these codes presents challenges to reproducibility: it takes a significant amount of effort to even be able to build and run them. 
 
-The sub-community of astrophysical fluid dynamics modeling thus tends to embrace open-source even without an official policy. However, this is, in our view, not sufficient, especially as it can vary from field to field: many of the most important spherical dynamo codes for studying stellar and planetary magnetic fields remain closed-source (e.g. \emph{Rayleigh}, \emph{ASH}, various derivatives of the Glatzmaier/Gilman code). The simulation code is only one part of a long pipeline that starts with an idea and ends with a published result. An open-code mandate should eliminate any closed-source bottlenecks that could hamper what is, in our view, the cornerstone of the scientific computing enterprise: repeatability. That is, simply because the largest piece of software is available, if the input files and analysis scripts are not also public, reproducibility becomes impossible. 
+The sub-community of astrophysical fluid dynamics modeling thus tends to embrace open-source even without an official policy. However, this is, in our view, not sufficient, especially as it can vary from field to field: many of the most important spherical dynamo codes for studying stellar and planetary magnetic fields remain closed-source (e.g. \emph{Rayleigh}\footnote{At the time this paper was submitted on 12 January 2018, \emph{Rayleigh} was closed source. Since that time, it has been made available under the GPL at \url{https://github.com/geodynamics/Rayleigh}}, \emph{ASH}, various derivatives of the Glatzmaier/Gilman code). The simulation code is only one part of a long pipeline that starts with an idea and ends with a published result. An open-code mandate should eliminate any closed-source bottlenecks that could hamper what is, in our view, the cornerstone of the scientific computing enterprise: repeatability. That is, simply because the largest piece of software is available, if the input files and analysis scripts are not also public, reproducibility becomes impossible. 
 
 \dedalus{} is written primarily in python; it has a very small code base of approximately 7000 source lines of code (SLOC). It originated in an effort by one of us to develop a easily modifiable, modern fluid dynamics solver for studying magnetohydrodynamic turbulence problems in AFD. The first commit to the project was in 2010. In 2012, the project expanded from two people to five. Since then, nine people have made commits to the code base, including four not affiliated with the core development team. We chose the term ``core team'' to represent not a privileged set of developers but a reflection of the current number of highly active participants in the development and future of \dedalus{}. We have logged 46 pull requests, representing peer-reviewed code contributions. The code is licensed under the GNU General Public License Version 3 (GPL). We chose this license to ensure that the source code always be available for inspection and auditing by any interested parties. 
 
@@ -80,7 +81,7 @@ Figure~\ref{fig:messages} shows the number of messages per month sent to the the
 \section{Software stack}
 \label{sec:stack}
 
-Complex AFD software relies on a non-trivial software stack to run. The stack can include compilers (e.g. C, C++, FORTRAN), interpreters (python), and libraries (FFTW, HDF5, BLAS, LAPACK). Besides providing input parameter files, analysis scripts, and the simulation code itself, one must also provide the entire software stack to outside researchers. In the case of \dedalus{}, the software stack is entirely open-source. This has both positive and negative effects on usability and workflow. It ensures there are no closed source or expensive, proprietary bottlenecks, and it ties to a rich ecosystem of tools, including Jupyter notebooks, docker containers, and integration with cloud computing services (e.g. \href{http://cocalc.com}{CoCalc} and \href{https://aws.amazon.com}{Amazon Web Services (AWS)}. 
+Complex AFD software relies on a non-trivial software stack to run. The stack can include compilers (e.g. C, C++, FORTRAN), interpreters (python), and libraries (FFTW, HDF5, BLAS, LAPACK). Besides providing input parameter files, analysis scripts, and the simulation code itself, one must also provide the entire software stack to outside researchers. In the case of \dedalus{}, the software stack is entirely open-source. This has both positive and negative effects on usability and workflow. It ensures there are no closed source or expensive, proprietary bottlenecks, and it ties to a rich ecosystem of tools, including Jupyter notebooks, docker containers, and integration with cloud computing services (e.g. \href{http://cocalc.com}{CoCalc} and \href{https://aws.amazon.com}{Amazon Web Services (AWS)}). 
 
 However, a significant drawback is the complexity of \emph{installing} this stack. One of the greatest challenges we face is the distribution of software on heterogeneous computing environments, including laptops running macOS, university clusters from hundreds to thousands of cores, and national class supercomputing facilities in the United States (NASA, NSF, DoE) and Europe (PRACE). In addition to merely installing \dedalus{} on these systems, an additional challenge lies in optimizing for performance and verification testing to ensure accuracy. 
 
@@ -117,5 +118,5 @@ We conclude by enumerating our recommendations for an open code policy:
 %  LocalWords:  GPL dedalus dev ICERM arXiv PhRvF Bordwell Benard SMD
 %  LocalWords:  Bitbucket msg KhHSlfrI fcFULv AAAJ google FFTW HDF
 %  LocalWords:  BLAS LAPACK CoCalc AWS macOS supercomputing DoE PRACE
-%  LocalWords:  miniconda datasets middleware frontends Jupyter
+%  LocalWords:  miniconda datasets middleware frontends Jupyter PhRvL
 %  LocalWords:  Shifter workflow
